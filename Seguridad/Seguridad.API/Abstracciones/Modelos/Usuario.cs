@@ -1,4 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Abstracciones.Modelos
 {
@@ -13,10 +18,8 @@ namespace Abstracciones.Modelos
         [EmailAddress]
         public string CorreoElectronico { get; set; }
     }
-    public class Usuario : UsuarioBase
-    {
+    public class Usuario:UsuarioBase {
         [Required]
-        public string Password { get; set; }
-        public string ConfirmarPassword { get; set; }
+        public Guid Id { get; set; }
     }
 }
