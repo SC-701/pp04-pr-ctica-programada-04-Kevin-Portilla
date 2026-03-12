@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// NUEVO: Abstracciones/Modelos/Seguridad/Login.cs
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Abstracciones.Modelos
+namespace Abstracciones.Modelos.Seguridad
 {
     public class LoginBase
     {

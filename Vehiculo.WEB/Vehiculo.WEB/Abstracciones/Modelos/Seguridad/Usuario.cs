@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Abstracciones.Modelos
 {
-    public class LoginBase
+    public class UsuarioBase
     {
+
         [Required]
         public string NombreUsuario { get; set; }
         [Required]
@@ -17,15 +13,9 @@ namespace Abstracciones.Modelos
         [EmailAddress]
         public string CorreoElectronico { get; set; }
     }
-    public class Login : LoginBase
-    {
-        [Required]
-        public Guid Id { get; set; }
-    }
-
-    public class LoginRequest : LoginBase
-    {
+    public class Usuario : UsuarioBase {
         [Required]
         public string Password { get; set; }
+        public string ConfirmarPassword { get; set; }
     }
 }

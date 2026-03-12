@@ -1,11 +1,16 @@
 using Abstracciones.Interfaces.Reglas;
 using Abstracciones.Modelos;
+using Abstracciones.Modelos.Servicios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Net;
+using System.Runtime.Intrinsics.Arm;
 using System.Text.Json;
 
 namespace Web.Pages.Vehiculos
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly IConfiguracion _configuracion;
@@ -18,19 +23,29 @@ namespace Web.Pages.Vehiculos
         public async Task OnGet()
         {
             string endpoint = _configuracion.ObtenerMetodo("ApiEndPoints", "ObtenerVehiculos");
-            var cliente = new HttpClient();
+            using var cliente = ObtenerClienteConToken();
             var solicitud = new HttpRequestMessage(HttpMethod.Get, endpoint);
-            Console.WriteLine("ENDPOINT => " + endpoint);
 
             var respuesta = await cliente.SendAsync(solicitud);
             respuesta.EnsureSuccessStatusCode();
-            var resultado = await respuesta.Content.ReadAsStringAsync();
-            var opciones = new JsonSerializerOptions
-            { PropertyNameCaseInsensitive = true };
-            vehiculos = JsonSerializer.Deserialize<List<VehiculoResponse>>(resultado, opciones);
-            Console.WriteLine("ENDPOINT => " + endpoint);
+            if (respuesta.StatusCode == HttpStatusCode.OK)
+            {
+                var resultado = await respuesta.Content.ReadAsStringAsync();
+                var opciones = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                vehiculos = JsonSerializer.Deserialize<List<VehiculoResponse>>(resultado, opciones);
+            }
+        }
 
-
+        private HttpClient ObtenerClienteConToken()
+        {
+            var tokenClaim = HttpContext.User.Claims
+                .FirstOrDefault(c => c.Type == "Token");
+            var cliente = new HttpClient();
+            if (tokenClaim != null)
+                cliente.DefaultRequestHeaders.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue(
+                        "Bearer", tokenClaim.Value);
+            return cliente;
         }
     }
 }
