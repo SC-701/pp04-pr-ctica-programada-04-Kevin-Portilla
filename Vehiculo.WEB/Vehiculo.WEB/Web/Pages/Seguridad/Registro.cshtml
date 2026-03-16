@@ -1,5 +1,5 @@
 ﻿@page
-@model Web.Pages.Cuenta.RegistroModel
+@model Web.Pages.Seguridad.RegistroModel
 @{
 }
 
@@ -12,50 +12,76 @@
                     Lorem ipsum dolor sit amet consectetur.
                 </h3>
             </div>
+
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+            @if (!string.IsNullOrEmpty(Model.MensajeDebug))
+            {
+                <div class="alert alert-warning" role="alert">
+                    <strong>Debug:</strong> @Model.MensajeDebug
+                </div>
+            }
+
             <form method="post">
                 <div class="input-group mb-3">
                     <span class="input-group-text">
-                        <i class=" bi bi-person-fill"></i>
+                        <i class="bi bi-person-fill"></i>
                     </span>
-                    <input type="text" asp-for="usuario.NombreUsuario" class="form-control"
+                    <input type="text"
+                           asp-for="usuario.NombreUsuario"
+                           class="form-control"
                            placeholder="Nombre de usuario" />
                 </div>
                 <div class="input-group mb-3">
                     <span asp-validation-for="usuario.NombreUsuario" class="text-danger"></span>
                 </div>
+
                 <div class="input-group mb-3">
                     <span class="input-group-text">
-                        <i class=" bi bi-envelope-at-fill"></i>
+                        <i class="bi bi-envelope-at-fill"></i>
                     </span>
-                    <input type="email" asp-for="usuario.CorreoElectronico" class="form-control"
+                    <input type="email"
+                           asp-for="usuario.CorreoElectronico"
+                           class="form-control"
                            placeholder="Correo electrónico" />
                 </div>
                 <div class="input-group mb-3">
                     <span asp-validation-for="usuario.CorreoElectronico" class="text-danger"></span>
                 </div>
+
                 <div class="input-group mb-3">
                     <span class="input-group-text">
-                        <i class=" bi bi-key-fill"></i>
+                        <i class="bi bi-key-fill"></i>
                     </span>
-                    <input type="password" asp-for="usuario.Password" class="form-control" />
+                    <input type="password"
+                           asp-for="usuario.Password"
+                           class="form-control"
+                           placeholder="Contraseña" />
                 </div>
                 <div class="input-group mb-3">
                     <span asp-validation-for="usuario.Password" class="text-danger"></span>
                 </div>
+
                 <div class="input-group mb-3">
                     <span class="input-group-text">
-                        <i class=" bi bi-key-fill"></i>
+                        <i class="bi bi-key-fill"></i>
                     </span>
-                    <input type="password" asp-for="usuario.ConfirmarPassword" class="form-control" />
+                    <input type="password"
+                           asp-for="usuario.ConfirmarPassword"
+                           class="form-control"
+                           placeholder="Confirmar contraseña" />
                 </div>
                 <div class="input-group mb-3">
                     <span asp-validation-for="usuario.ConfirmarPassword" class="text-danger"></span>
                 </div>
+
                 <div class="form-check d-flex justify-content-center mb-5">
                     <input class="form-check-input me-2" type="checkbox" value="" id="aceptar" />
-                    He leído y acepto <a href="#!">los términos y condiciones de uso</a>
+                    <label for="aceptar">
+                        He leído y acepto <a href="#!">los términos y condiciones de uso</a>
                     </label>
                 </div>
+
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-primary btn-lg">Registrarse</button>
                 </div>
@@ -63,3 +89,7 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

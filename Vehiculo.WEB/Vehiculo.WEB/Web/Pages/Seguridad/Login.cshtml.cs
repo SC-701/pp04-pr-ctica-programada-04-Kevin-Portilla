@@ -1,5 +1,6 @@
 ﻿// Login.cshtml.cs
 using Abstracciones.Interfaces.Reglas;
+using Abstracciones.Modelos;
 using Abstracciones.Modelos.Seguridad;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -9,9 +10,8 @@ using Reglas;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text.Json;
-using LoginRequest = Abstracciones.Modelos.Seguridad.LoginRequest;
 
-namespace Web.Pages.Cuenta
+namespace Web.Pages.Seguridad
 {
     public class LoginModel : PageModel
     {
