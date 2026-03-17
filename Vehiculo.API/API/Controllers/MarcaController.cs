@@ -1,12 +1,14 @@
 ﻿using Abstracciones.Interfaces.API;
 using Abstracciones.Interfaces.Flujo;
 using Abstracciones.Modelos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MarcaController : ControllerBase, IMarcaController
     {
         private IMarcaFlujo _marcaFlujo;
@@ -19,6 +21,7 @@ namespace API.Controllers
         }
         #region Operaciones
         [HttpGet]
+        [Authorize(Roles = "1")]
         public async Task<IActionResult> Obtener()
         {
             var resultado = await _marcaFlujo.Obtener();
