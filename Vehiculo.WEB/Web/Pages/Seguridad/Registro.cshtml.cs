@@ -19,7 +19,10 @@ namespace Web.Pages.Seguridad
 
         public async Task<IActionResult> OnPost()
         {
-            if (!ModelState.IsValid) return Page();
+            ModelState.Remove("usuario.PasswordHash");
+
+            if (!ModelState.IsValid)
+                return Page();
 
             var hash = Autenticacion.GenerarHash(usuario.Password);
             usuario.PasswordHash = Autenticacion.ObtenerHash(hash);
@@ -28,7 +31,8 @@ namespace Web.Pages.Seguridad
             var cliente = new HttpClient();
             var respuesta = await cliente.PostAsJsonAsync<UsuarioBase>(endpoint, usuario);
             respuesta.EnsureSuccessStatusCode();
-            return RedirectToPage("../index");
+
+            return RedirectToPage("../Index");
         }
     }
 }
