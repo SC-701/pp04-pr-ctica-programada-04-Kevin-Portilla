@@ -14,7 +14,7 @@ namespace Web.Pages.Seguridad
     public class LoginModel : PageModel
     {
         [BindProperty]
-        public LoginRequest loginInfo { get; set; } = default!;
+        public LoginRequest loginInfo { get; set; }
         [BindProperty]
         public Token token { get; set; } = default!;
 
@@ -31,9 +31,6 @@ namespace Web.Pages.Seguridad
 
         public async Task<IActionResult> OnPost()
         {
-            ModelState.Remove("loginInfo.PasswordHash");
-            ModelState.Remove("loginInfo.NombreUsuario");
-            ModelState.Remove("token");
             if (ModelState.IsValid)
             {
                 // 1. Hashear la contraseña (byte[] → string hexadecimal)

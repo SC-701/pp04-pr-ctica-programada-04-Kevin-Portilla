@@ -19,7 +19,6 @@ namespace Web.Pages.Seguridad
 
         public async Task<IActionResult> OnPost()
         {
-            ModelState.Remove("usuario.PasswordHash");
 
             if (!ModelState.IsValid)
                 return Page();

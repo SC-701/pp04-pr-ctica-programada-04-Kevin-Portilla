@@ -4,13 +4,11 @@ namespace Abstracciones.Modelos.Seguridad
 {
     public class LoginBase
     {
-        [Required]
         public string? NombreUsuario { get; set; }
-        [Required]
         public string? PasswordHash { get; set; }
         [Required]
         [EmailAddress]
-        public string CorreoElectronico { get; set; }
+        public string? CorreoElectronico { get; set; }
     }
     public class Login : LoginBase
     {
@@ -20,6 +18,6 @@ namespace Abstracciones.Modelos.Seguridad
     public class LoginRequest : LoginBase
     {
         [Required]
-        public string Password { get; set; }
+        public string? Password { get; set; }
     }
 }

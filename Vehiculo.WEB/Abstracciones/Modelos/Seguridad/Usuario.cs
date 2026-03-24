@@ -6,18 +6,17 @@ namespace Abstracciones.Modelos.Seguridad
     {
 
         [Required]
-        public string NombreUsuario { get; set; }
-        [Required]
+        public string? NombreUsuario { get; set; }
         public string? PasswordHash { get; set; }
         [Required]
         [EmailAddress]
-        public string CorreoElectronico { get; set; }
+        public string? CorreoElectronico { get; set; }
     }
     public class Usuario : UsuarioBase
     {
         [Required]
-        public string Password { get; set; }
-        public string ConfirmarPassword { get; set; }
+        public string? Password { get; set; }
+        public string? ConfirmarPassword { get; set; }
 
     }
 }
